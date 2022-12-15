@@ -23,14 +23,17 @@ Run the API, this will let you control the weather monitor remotely
 sudo apt install nginx
 ~~~~
 This will allow your Pi to be seen externally
+
 2) Run 
 ~~~~
 ip address
 ~~~~
 And note down your external ip address
+
 3) In the weather monitor directory run
 ~~~~
 uvicorn api_server:app --reload --host [external ip address]
 ~~~~
+
 4) In your browser go to http://[external ip]:8000/docs
 
