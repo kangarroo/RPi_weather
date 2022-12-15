@@ -5,9 +5,8 @@ from PIL import Image, ImageDraw, ImageFont
 import requests
 import sched,time
 import json
+from os import environ
 
-# refresh_period_mins = 0
-# city = ""
 
 def update_screen(display, text_to_display, image_to_show=""):
     text = Image.new("P", display.resolution,color=display.WHITE)
@@ -16,9 +15,6 @@ def update_screen(display, text_to_display, image_to_show=""):
     d.multiline_text((125,0), text_to_display, display.BLACK, font=fnt)
     with Image.open(get_image_path(image_to_show)) as img:
         text.paste(img,(0,0))
-        # text.apply_transparency()
-        # text.alpha_composite(img,0,img)
-        # #out = Image.alpha_composite(img, text)
     display.set_image(text)
     display.show()
 
@@ -63,7 +59,7 @@ def get_image_path(image_to_show):
         return("./res/tama_nbg.png")
 
 def get_weather(city):
-    payload = {'q': city, 'units': 'metric', 'appid':'60019ede14b9def4076032a9774483e5'}
+    payload = {'q': city, 'units': 'metric', 'appid':environ.get('WEATHER_API')}
     r = requests.get('https://api.openweathermap.org/data/2.5/weather', params=payload)
     return r.status_code,r.json()
 
