@@ -16,7 +16,7 @@ base_path = "./res/weather/"
                                            ("10d",base_path+"dark_cloud_rain.png"),
                                            ("10n",base_path+"dark_cloud_rain.png"),
                                            ("11d",base_path+"dark_cloud_lightning.png"),
-                                           ("11n",base_path+"dark_cloud_lightning..png"),
+                                           ("11n",base_path+"dark_cloud_lightning.png"),
                                            ("13d",base_path+"snow.png"),
                                            ("13n",base_path+"snow.png"),
                                            ("50d",base_path+"mist.png"),
