@@ -1,3 +1,5 @@
 fastapi[all]
 requests
 inky
+pytest
+pillow
