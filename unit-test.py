@@ -1,6 +1,7 @@
 import pytest
-from weather import get_image_path
-
+from unittest.mock import patch, mock_open, MagicMock
+#from weather import get_image_path, update_location,do_update,get_display
+import weather
 base_path = "./res/weather/"
 
 @pytest.mark.parametrize("input,expected",[("01d",base_path+"sun_clear.png"),
@@ -23,4 +24,22 @@ base_path = "./res/weather/"
                                            ("50n",base_path+"mist.png"),
                                            ("BAD_INPUT","./res/tama_nbg.png")])
 def test_get_image_path(input,expected):
-    assert get_image_path(input) == expected
+    assert weather.get_image_path(input) == expected
+
+json_text = '''
+{
+    "location":"London,uk",
+    "refresh_period_mins":10
+}
+'''
+@patch("weather.do_update")
+@patch("weather.get_display", return_value={})
+def test_update_location(mockDoUpdate, mock_get_display):
+    # do_update = MagicMock()
+    # get_display = MagicMock(return_value={})
+    with patch("builtins.open",mock_open(read_data=json_text)) as mock_file:
+        refresh_mins,city = weather.update_location()
+        assert refresh_mins == 600
+        assert city == "London,uk"
+        
+
