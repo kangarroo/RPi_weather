@@ -41,6 +41,5 @@ def test_update_location(mock_do_update, mock_get_display):
         refresh_mins,city = weather.update_location()
         assert refresh_mins == 600
         assert city == "London,uk"
-        mock_do_update.assert_called_with({},"London,uk")
         
 
