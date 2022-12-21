@@ -34,12 +34,13 @@ json_text = '''
 '''
 @patch("weather.do_update")
 @patch("weather.get_display", return_value={})
-def test_update_location(mockDoUpdate, mock_get_display):
+def test_update_location(mock_do_update, mock_get_display):
     # do_update = MagicMock()
     # get_display = MagicMock(return_value={})
     with patch("builtins.open",mock_open(read_data=json_text)) as mock_file:
         refresh_mins,city = weather.update_location()
         assert refresh_mins == 600
         assert city == "London,uk"
+        mock_do_update.assert_called_with(mock_get_display,"London,uk")
         
 
